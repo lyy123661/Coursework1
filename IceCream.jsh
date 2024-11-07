@@ -5,7 +5,7 @@ int vanillaPrice = Integer.parseInt(studentId.substring(6, 8));
 int chocolatePrice = Integer.parseInt(studentId.substring(4, 6));
 int strawberryPrice = Integer.parseInt(studentId.substring(2, 4));
 int conePrice = 100;
-System.out.print("Would you like (v)anilla, (c)hocolate or (s)trawberry? ");
+System.out.println("Would you like (v)anilla, (c)hocolate or (s)trawberry? ");
 String flavour = scanner.nextLine();
 int pricePerScoop = 0;
 if (flavour.equals("v")) {
@@ -17,7 +17,7 @@ if (flavour.equals("v")) {
 } else {
     System.out.println("We don't have that flavour.");
 }
-System.out.print("How many scoops would you like? ");
+System.out.println("How many scoops would you like? ");
 int numberOfScoops = scanner.nextInt();
 if (numberOfScoops < 1) {
     System.out.println("We don't sell just a cone.");
