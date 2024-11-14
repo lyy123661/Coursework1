@@ -1,31 +1,37 @@
-import java.util.Scanner;
+String studentNumber = "32803933";
+int lastSixDigits = Integer.parseInt(studentNumber.substring(studentNumber.length() - 6));
+int vanillaPrice = lastSixDigits % 100;
+int chocolatePrice = (lastSixDigits / 100) % 100;
+int strawberryPrice = (lastSixDigits / 10000) % 100;
 Scanner scanner = new Scanner(System.in);
-String studentId = "32803933";
-int vanillaPrice = Integer.parseInt(studentId.substring(6, 8));
-int chocolatePrice = Integer.parseInt(studentId.substring(4, 6));
-int strawberryPrice = Integer.parseInt(studentId.substring(2, 4));
-int conePrice = 100;
-System.out.println("Would you like (v)anilla, (c)hocolate or (s)trawberry? ");
-String flavour = scanner.nextLine();
-int pricePerScoop = 0;
-if (flavour.equals("v")) {
-    pricePerScoop = vanillaPrice;
-} else if (flavour.equals("c")) {
-    pricePerScoop = chocolatePrice;
-} else if (flavour.equals("s")) {
-    pricePerScoop = strawberryPrice;
-} else {
+System.out.println("Would you like (v)anilla, (c)hocolate or (s)trawberry?");
+String flavour = scanner.next();
+if (!flavour.equalsIgnoreCase("v") && !flavour.equalsIgnoreCase("c") && !flavour.equalsIgnoreCase("s")) { 
     System.out.println("We don't have that flavour.");
-}
-System.out.println("How many scoops would you like? ");
-int numberOfScoops = scanner.nextInt();
-if (numberOfScoops < 1) {
-    System.out.println("We don't sell just a cone.");
-} else if (numberOfScoops > 3) {
-    System.out.println("That's too many scoops to fit in a cone.");
+    scanner.close(); 
 } else {
-    int totalCostInPence = conePrice + pricePerScoop * numberOfScoops;
-    int pounds = totalCostInPence / 100;
-    int pence = totalCostInPence % 100;
-    System.out.printf("That will be %d.%02d please.\n", pounds, pence);
+    System.out.println("How many scoops would you like?");
+    int scoops = scanner.nextInt();
+    int basePrice = 100;
+    int totalCost = 0;   
+    if (scoops > 3) { 
+        System.out.println("That's too many scoops to fit in a cone.");
+} else if (scoops == 0) { 
+        System.out.println("We don't sell just a cone.");
+} else {
+        switch (flavour.toLowerCase()) {
+            case "v": 
+                totalCost = basePrice + (vanillaPrice * scoops); 
+                break;
+            case "c": 
+                totalCost = basePrice + (chocolatePrice * scoops); 
+                break;
+            case "s": 
+                totalCost = basePrice + (strawberryPrice * scoops); 
+                break;
+    }
+        int pounds = totalCost / 100; 
+        int pence = totalCost % 100;
+        System.out.println("That will be " + pounds + "." + String.format("%02d", pence) + " please.");
+}
 }
